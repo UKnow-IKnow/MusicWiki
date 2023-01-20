@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">MusicWiki</string>
-    
+
     <string name="welcome">Welcome!</string>
     <string name="choose_genre">Choose a genre to start with</string>
+    <string name="title">Rock</string>
+    <string name="description">Descriptions</string>
+    <string name="albums">ALBUMS</string>
+    <string name="artists">ARTISTS</string>
+    <string name="tracks">TRACKS</string>
 </resources>
