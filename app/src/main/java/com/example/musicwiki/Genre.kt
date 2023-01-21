@@ -6,10 +6,9 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.musicwiki.adapters.AlbumAdapter
+import com.example.musicwiki.adapters.ArtistAdapter
 import com.example.musicwiki.api.RetrofitInstance
-import com.example.musicwiki.model.Album
-import com.example.musicwiki.model.TagInfoResponse
-import com.example.musicwiki.model.TopAlbumResponse
+import com.example.musicwiki.model.*
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_genre.*
 import retrofit2.Call
@@ -21,6 +20,9 @@ class Genre : AppCompatActivity() {
 
     var albums: MutableList<Album> = mutableListOf()
     val albumAdapter: AlbumAdapter = AlbumAdapter(albums)
+
+    var artist: MutableList<Artist> = mutableListOf()
+    val artistAdapter: ArtistAdapter = ArtistAdapter(artist)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,8 @@ class Genre : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab!!.text!!.equals("ALBUMS")) {
                     recyclerView.adapter = albumAdapter
+                }else if (tab.text!!.equals("ARTISTS")) {
+                    recyclerView.adapter = artistAdapter
                 }
             }
 
@@ -51,6 +55,30 @@ class Genre : AppCompatActivity() {
 
         getTopInfo()
         getTopAlbums()
+        getTopArtists()
+    }
+
+    private fun getTopArtists() {
+        val response = RetrofitInstance.api.getTagArtists(tagName)
+        response.enqueue(
+            object : retrofit2.Callback<TopArtistResponse> {
+                override fun onResponse(
+                    call: Call<TopArtistResponse>,
+                    response: Response<TopArtistResponse>
+                ) {
+                    if (response.body() != null) {
+                        val topArtistResponse = (response.body())!!
+                        artist.addAll(topArtistResponse.topartists.artist)
+                        artistAdapter.notifyDataSetChanged()
+                    }
+                }
+
+                override fun onFailure(call: Call<TopArtistResponse>, t: Throwable) {
+                    Toast.makeText(this@Genre, "Failed $t", Toast.LENGTH_LONG).show()
+                }
+
+            }
+        )
     }
 
     private fun getTopAlbums() {

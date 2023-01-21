@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Title"
+        android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/artist"
         android:gravity="center_horizontal" />
 
@@ -36,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Artist"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         android:gravity="center_horizontal" />
 
