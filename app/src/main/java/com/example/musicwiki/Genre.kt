@@ -42,19 +42,19 @@ class Genre : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab!!.text!!.equals("ALBUMS")) {
                     recyclerView.adapter = albumAdapter
-                }else if (tab!!.text!!.equals("ARTISTS")) {
+                }else if (tab.text!!.equals("ARTISTS")) {
                     recyclerView.adapter = artistAdapter
-                }else if (tab!!.text!!.equals("TRACKS")){
+                }else if (tab.text!!.equals("TRACKS")){
                     recyclerView.adapter=trackAdapter
                 }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
+
             }
 
         })
