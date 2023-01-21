@@ -1,10 +1,10 @@
-package com.example.musicwiki
+package com.example.musicwiki.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.musicwiki.R
 import com.example.musicwiki.adapters.AlbumAdapter
 import com.example.musicwiki.adapters.ArtistAdapter
 import com.example.musicwiki.adapters.TrackAdapter
@@ -34,18 +34,18 @@ class Genre : AppCompatActivity() {
 
         Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
 
-        recyclerView.layoutManager = GridLayoutManager(this,2)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = albumAdapter
         tagName = intent.getStringExtra("tag")!!
 
-        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab!!.text!!.equals("ALBUMS")) {
                     recyclerView.adapter = albumAdapter
-                }else if (tab.text!!.equals("ARTISTS")) {
+                } else if (tab.text!!.equals("ARTISTS")) {
                     recyclerView.adapter = artistAdapter
-                }else if (tab.text!!.equals("TRACKS")){
-                    recyclerView.adapter=trackAdapter
+                } else if (tab.text!!.equals("TRACKS")) {
+                    recyclerView.adapter = trackAdapter
                 }
             }
 
@@ -68,7 +68,7 @@ class Genre : AppCompatActivity() {
     private fun getTopTracks() {
         val response = RetrofitInstance.api.getTagTracks(tagName)
         response.enqueue(
-            object: retrofit2.Callback<TopTrackResponse>{
+            object : retrofit2.Callback<TopTrackResponse> {
                 override fun onResponse(
                     call: Call<TopTrackResponse>,
                     response: Response<TopTrackResponse>
@@ -115,7 +115,7 @@ class Genre : AppCompatActivity() {
 
         val response = RetrofitInstance.api.getTopAlbums(tagName)
         response.enqueue(
-            object :retrofit2.Callback<TopAlbumResponse>{
+            object : retrofit2.Callback<TopAlbumResponse> {
                 override fun onResponse(
                     call: Call<TopAlbumResponse>,
                     response: Response<TopAlbumResponse>
@@ -139,7 +139,7 @@ class Genre : AppCompatActivity() {
 
         val response = RetrofitInstance.api.getTagInfo(tagName)
         response.enqueue(
-            object: retrofit2.Callback<TagInfoResponse>{
+            object : retrofit2.Callback<TagInfoResponse> {
                 override fun onResponse(
                     call: Call<TagInfoResponse>,
                     response: Response<TagInfoResponse>

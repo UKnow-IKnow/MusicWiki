@@ -1,4 +1,4 @@
-package com.example.musicwiki
+package com.example.musicwiki.ui
 
 
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.musicwiki.R
 import com.example.musicwiki.api.RetrofitInstance
 import com.example.musicwiki.model.Tag
 import com.example.musicwiki.model.TopTagResponse
@@ -48,15 +49,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshList() {
-        if (isListExpended){
+        if (isListExpended) {
             toggleIcon.setImageResource(R.drawable.ic_expand_less)
-        }else{
+        } else {
             toggleIcon.setImageResource(R.drawable.ic_expand_more)
         }
         chipGroup.removeAllViews()
 
-        for (i in 1 until tagList.size ){
-            if (i == 9 && !isListExpended){break}
+        for (i in 1 until tagList.size) {
+            if (i == 9 && !isListExpended) {
+                break
+            }
             val tag = tagList[i]
             val chip = Chip(this)
             chip.text = tag.name
@@ -71,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun buttonPressed(view: View){
+    fun buttonPressed(view: View) {
         isListExpended = !isListExpended
         refreshList()
     }
